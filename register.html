@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>注册</title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/Buttons.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css" />
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				border: 0px;
+			}
+			
+			body {
+				background: #F7FAFC;
+			}
+			
+			.logo {
+				display: block;
+				width: 100px;
+				height: 100px;
+				margin: auto;
+				margin-top: 50px;
+				margin-bottom: 10px;
+				font-size: 100px;
+				font-weight: bolder;
+				color: #0F88EB;
+			}
+			
+			.txt {
+				display: block;
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+				font-size: 18px;
+				color: #666666;
+			}
+			
+			.username {
+				display: block;
+				border: 1px solid #D5D5D5;
+				outline: none;
+				text-align: center;
+				line-height: 50px;
+				width: 90%;
+				height: 50px;
+				font-size: 16px;
+				margin: 20px auto;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.mail {
+				width: 90%;
+				height: 50px;
+				border: 1px solid #D5D5D5;
+				margin: auto;
+				line-height: 50px;
+				text-align: center;
+				outline: none;
+				font-size: 16px;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.mail:empty:before,
+			.username:empty:before {
+				content: attr(placeholder);
+				font-size: 18px;
+				color: #d5d5d5;
+			}
+			
+			.mail:focus:before,
+			.username:focus:before {
+				content: none;
+			}
+			
+			.password {
+				display: block;
+				width: 90%;
+				height: 50px;
+				border: 1px solid #D5D5D5;
+				margin: 20px auto;
+				line-height: 50px;
+				text-align: center;
+				outline: none;
+				font-size: 16px;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.button {
+				display: block;
+				width: 90%;
+				margin: auto;
+			}
+			
+			.reg-login {
+				height: 50px;
+				line-height: 70px;
+				display: block;
+				font-size: 14px;
+				width: 90%;
+				text-align: right;
+			}
+			
+			a {
+				text-decoration: none;
+				color: #666666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<span class="logo Hui-iconfont Hui-iconfont-share-zhihu"></span>
+		<span class="txt">积累知识，胜于积累金银</span>
+		<div class="username" placeholder='昵称' contenteditable></div>
+		<div class="mail" v-html='name' placeholder='注册账号' contenteditable="true"></div>
+		<input class="password" type="password" placeholder='密码（不少于6位）' />
+		<a href="javascript:;" @click='send' class="button button-3d button-primary button-rounded">注册</a>
+		<span class="reg-login"><a href="login.html">返回登录</a></span>
+	</body>
+	<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				var vue = new Vue({
+						el: "body",
+						methods: {
+							send: function() {
+								if ($(".mail").html() != "" && $(".password").val() != "" && $(".username").html() != "") {
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/select_user_zt/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'select_user_zt',
+											_v1: $(".mail").html()
+										},
+										success: function(json) {
+											console.log(JSON.parse(json)[2])
+											if (JSON.parse(json)[2] == "") {
+												$.ajax({
+													type: "get",
+													url: "http://v2.mashupcloud.cn/SQL/reg_user/",
+													data: {
+														appid: dd,
+														token: ss,
+														name: 'reg_user',
+														_v1: $(".mail").html(),
+														_v2: $(".password").val(),
+														_v3: $(".username").html(),
+														_v4: "false@163.com"
+													},
+													success: function(json) {
+														$.alert("注册成功！", "恭喜您！");
+													}
+												}); //注册的Ajax结束符
+											} else {
+												$.alert("注册账号已存在", "注册失败！");
+											}
+										}
+									}); //查询是否有注册名结束AJAX
+								} else {
+									$.alert("请重新填写！", "填写不全！");
+								}
+							}
+						} //methods结束符
+					}) //vue结束符
+			},
+			error: function(json) {
+				console.log("初始化失败")
+			}
+		});
+	</script>
+
+</html>

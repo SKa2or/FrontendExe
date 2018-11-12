@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		.personal_top {
+			height: 50px;
+		}
+		
+		.personal_top_txt {
+			color: white;
+			font-weight: bolder;
+			font-family: "微软雅黑";
+			font-size: 20px;
+			line-height: 50px;
+			margin-left: 20px;
+		}
+		.personal_footer{
+			position: fixed;
+			bottom: 0px;
+			
+		}
+		/**{
+			background-image: url(img/index/timg.jpg);
+		}*/
+	</style>
+
+	<body>
+		<!--
+        	作者：530929822@qq.com
+        	时间：2017-03-29
+        	描述：个人中心
+        -->
+        
+		<!--顶部开始-->
+		<div class="personal_top top_blue"  >
+			<span class="personal_top_txt top_blue" >更多</span>
+		</div>
+		<!--顶部结束-->
+		<!--内容开始-->
+		<div class="personal_content">
+			<div class=" weui-panel weui-panel_access">
+				<div class="weui-panel__bd">
+					<a @click='personalCenter' class="weui-media-box weui-media-box_appmsg">
+						<div class="weui-media-box__hd">
+							<img class="weui-media-box__thumb b_radus" src="img/personal/SKa2or.jpeg">
+						</div>
+						<div class="weui-media-box__bd">
+							<h3 class="weui-media-box__title font_color6" v-html='name'></h3>
+							<p class="weui-media-box__desc">查看或编辑个人主页</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!--个人头像行结束-->
+			<div class="weui-panel">
+				<!--
+             	作者：530929822@qq.com
+             	时间：2017-03-29
+             	描述：关注，收藏，草稿，浏览，书架，Live，值呼
+             -->
+				<div class="weui-panel__bd">
+					<div class="weui-media-box weui-media-box_small-appmsg">
+						<div class="weui-cells">
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-yanjing font_color6 m_right10">
+									<!--font字体-->
+								</div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的关注</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="collection.html">
+								<div class="Hui-iconfont Hui-iconfont-cang-selected font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的收藏</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-new font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的草稿</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-shijian font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">最近浏览</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-yuedu font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的书架</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-github font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的Live</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+							<a class="weui-cell weui-cell_access" href="javascript:;">
+								<div class="Hui-iconfont Hui-iconfont-share-zhihu font_color6 m_right10"></div>
+								<div class="weui-cell__bd weui-cell_primary">
+									<p class="font-size14 font_color6">我的值乎</p>
+								</div>
+								<span class="weui-cell__ft"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--夜间模式开始-->
+				<div class="weui-cell weui-cell_switch">
+					<div class="Hui-iconfont Hui-iconfont-tianqi-qing font_color6 m_right10"></div>
+					<div class="weui-cell__bd font-size14 font_color6">夜间模式</div>
+					<div class="weui-cell__ft" @click='yejian'>
+						<input class="weui-switch" type="checkbox">
+					</div>
+				</div>
+				<!--夜间模式结束-->
+				<a class="weui-cell weui-cell_access" @click='closeDl'>
+					<div class="Hui-iconfont Hui-iconfont-share-zhihu font_color6 m_right10"></div>
+					<div class="weui-cell__bd weui-cell_primary">
+						<p class="font-size14 font_color6">退出登录</p>
+					</div>
+				</a>
+			</div>
+		</div>
+		<script type="text/javascript">
+        	if(sessionStorage.getItem("夜间")) {
+			$("*").attr("style", "background-image: url(img/index/timg.jpg);")
+		}
+        </script>
+		<!--内容结束-->
+		<!--底部按钮开始-->
+		<div class="weui-tabbar personal_footer">
+			<a href="index.html" class="weui-tabbar__item ">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-share-zhihu"></p>
+			</a>
+			<a href="found.html" class="weui-tabbar__item">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-canshu"></p>
+			</a>
+			<a href="IM.html" class="weui-tabbar__item">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-msg"></p>
+			</a>
+			<a href="personal.html" class="weui-tabbar__item">
+				<p class="footertab_blue weui-tabbar__label Hui-iconfont Hui-iconfont-menu"></p>
+			</a>
+		</div>
+		<!--底部按钮结束-->
+	</body>
+	
+	<script type="text/javascript">
+		
+		//	console.log(sessionStorage.getItem("登录"))
+		if(sessionStorage.getItem("登录")) {
+			$.ajax({
+				type: 'get',
+				url: "http://v2.mashupcloud.cn/developer/auth.do",
+				data: {
+					appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+					appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+				},
+				success: function(json) {
+					ss = JSON.parse(json)[1];
+					dd = JSON.parse(json)[2];
+					$.ajax({
+						type: "get",
+						url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+						data: {
+							appid: dd,
+							token: ss,
+							name: 'sele_user',
+							_v1: sessionStorage.getItem("登录")
+						},
+						success: function(json) {
+							console.log(JSON.parse(json)[2][0].nicheng)
+							var vue = new Vue({
+								el: "body",
+								data: {
+									name: JSON.parse(json)[2][0].nicheng
+								},
+								methods: {
+									personalCenter: function() {
+										location.href = 'personal-center.html'
+									},
+									closeDl: function() {
+										sessionStorage.removeItem("登录");
+										vue.name = "登录";
+									},
+									yejian: function(json) {
+										console.log(json)
+										
+										if(sessionStorage.getItem("夜间")) {
+											sessionStorage.removeItem("夜间")
+											$("*").attr("style", "background-image: none;")
+											$(".personal_top").attr("style", "backgroud-color:none;")
+											$(".personal_top span").attr("style", "backgroud-color:none;")
+										}else if (!sessionStorage.getItem("夜间")) {
+											sessionStorage.setItem("夜间", true);
+											$("*").attr("style", "background-image: url(img/index/timg.jpg);")
+											$(".personal_top").attr("style", "backgroud-color:#0664C2;")
+											$(".personal_top span").attr("style", "backgroud-color:#0664C2;")
+										}
+
+									}
+								}
+							})
+						}
+					}); //根据id查名字ajax结束符 
+				}
+			});
+			//			
+		} else {
+			$(".weui-media-box__title").html("登录");
+			$(".weui-media-box").click(function() {
+				location.href = 'login.html'
+			})
+		}
+	</script>
+
+</html>

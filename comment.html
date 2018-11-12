@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css" />
+		<style type="text/css">
+			.IM-Chat_top {
+				top: 0px;
+				height: 50px;
+				display: -webkit-box;
+				line-height: 50px;
+				color: white;
+				position: fixed;
+				width: 100%;
+			}
+			
+			.IM-Chat_topFanhui {
+				width: 50px;
+				font-size: 18px;
+				margin: 0px 10px;
+				color: #FFF;
+				text-decoration: none;
+				text-align: center;
+			}
+			
+			.IM-Chat_topName {
+				-webkit-box-flex: 1;
+				font-size: 18px;
+				margin-left: 20px;
+			}
+			
+			.IM-Chat_footer {
+				position: fixed;
+				width: 100%;
+				bottom: 0px;
+				left: 0px;
+				height: 50px;
+				-webkit-box-align: center;
+				background: #F0F0F0;
+				display: -webkit-box;
+			}
+			
+			.IM-Chat_footerInput {
+				height: 30px;
+				line-height: 30px;
+				margin: 0px 20px;
+				-webkit-box-flex: 1;
+			}
+			
+			.IM-Chat_footerSend {
+				height: 30px;
+				width: 30px;
+				margin-right: 10px;
+				font-size: 20px;
+				text-align: center;
+				line-height: 30px;
+			}
+			
+			.IM-Chat_footerSend:active {
+				color: blue;
+			}
+			
+			.content {
+				padding: 50px 0px;
+			}
+			
+			.pinglun {
+				border-bottom: 1px solid #999;
+				word-break: break-word;
+				padding: 10px 10px;
+			}
+			
+			.else {
+				margin-top: 10px;
+				display: -webkit-box;
+			}
+			
+			.time {
+				-webkit-box-flex: 1;
+				font-size: 12px;
+				color: #999;
+			}
+			
+			.zan {
+				font-size: 12px;
+				color: #999;
+				width: 50px;
+			}
+			
+			.name {
+				font-size: 16px;
+			}
+			
+			.txt {
+				color: #666;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="IM-Chat_top top_blue">
+			<a @click="fanhui" class="IM-Chat_topFanhui Hui-iconfont Hui-iconfont-close"></a>
+			<span class="IM-Chat_topName">评论</span>
+		</div>
+		<!--loading预加载-->
+		<div class="csshub-loading" v-if='loadingShow'>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<!--loading预加载结束-->
+		<div class="content">
+			<div class="pinglun" v-for="item in list">
+				<div class="name" v-html="item.p_id"></div>
+				<div class="txt" v-html="item.p_text"></div>
+				<div class="else">
+					<div class="time" v-html="item.p_time"></div>
+					<div class="zan">点赞数 <span>0</span></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="IM-Chat_footer">
+			<div id="input" contenteditable class="IM-Chat_footerInput"></div>
+			<div @click='send' class="IM-Chat_footerSend font-weight Hui-iconfont Hui-iconfont-fabu"></div>
+		</div>
+	</body>
+	<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var time = new Date().toLocaleString()
+			//接URL参数
+		var loc = location.href;
+		var n1 = loc.length; //地址的总长度
+		var n2 = loc.indexOf("="); //取得=号的位置
+		var index = decodeURI(loc.substr(n2 + 1, n1 - n2)); //从=号后面的内容
+		//接URL参数
+		console.log(index)
+		var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				console.log(json)
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				$.ajax({
+					type: 'get',
+					url: "http://v2.mashupcloud.cn/SQL/sele_ping/",
+					data: {
+						appid: dd,
+						token: ss,
+						name: 'sele_ping',
+						_v1: index
+					},
+					success: function(json) {
+						console.log(JSON.parse(json))
+						var vue = new Vue({
+								el: "body",
+								data: {
+									list: JSON.parse(json)[2]
+								},
+								methods: {
+									fanhui: function() {
+										location.href = "card.html?" + "index=" + encodeURI(index)
+									},
+									send: function() {
+										if(sessionStorage.getItem("登录")) {
+											$.ajax({
+												type: "get",
+												url: "http://v2.mashupcloud.cn/SQL/into_p/",
+												data: {
+													appid: dd,
+													token: ss,
+													name: 'into_p',
+													_v1: index,
+													_v2: $(".IM-Chat_footerInput").html(),
+													_v3: sessionStorage.getItem("登录"),
+													_v4: time
+												},
+												success: function() {
+													$.ajax({
+														type: "get",
+														url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+														async: false,
+														data: {
+															appid: dd,
+															token: ss,
+															name: 'sele_user',
+															_v1: sessionStorage.getItem("登录")
+														},
+														success: function(json) {
+															//把数组中的p_id修改成名字
+															obj = {
+																tie_id: index,
+																p_text: $(".IM-Chat_footerInput").html(),
+																p_id: JSON.parse(json)[2][0].nicheng,
+																p_time: time
+															}
+															vue.list.push(obj);
+														}
+													});
+												}
+											}); //发帖ajax结束
+
+										} else {
+											$.alert("请您登录后在评价！", "未登录！");
+										}
+									}
+								}
+							})
+							//根据id查用户名
+						for(var i = 0; i < JSON.parse(json)[2].length; i++) {
+							$.ajax({
+								type: "get",
+								url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+								async: false,
+								data: {
+									appid: dd,
+									token: ss,
+									name: 'sele_user',
+									_v1: JSON.parse(json)[2][i].p_id
+								},
+								success: function(json) {
+									//把数组中的p_id修改成名字
+									vue.list[i].p_id = JSON.parse(json)[2][0].nicheng
+
+								}
+							});
+						}
+					},
+					error: function(json) {
+						console.log("失败");
+					}
+				});
+			}
+		});
+	</script>
+
+</html>

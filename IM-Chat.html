@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<style type="text/css">
+			.IM-Chat_top {
+				top: 0px;
+				height: 50px;
+				display: -webkit-box;
+				line-height: 50px;
+				color: white;
+				position: fixed;
+				width: 100%;
+			}
+			
+			.IM-Chat_topFanhui {
+				width: 50px;
+				font-size: 18px;
+				margin: 0px 10px;
+				color: #FFF;
+				text-decoration: none;
+				text-align: center;
+			}
+			
+			.IM-Chat_topName {
+				-webkit-box-flex: 1;
+				font-size: 18px;
+				margin-left: 20px;
+			}
+			
+			.IM-Chat_footer {
+				position: fixed;
+				width: 100%;
+				bottom: 0px;
+				left: 0px;
+				height: 50px;
+				-webkit-box-align: center;
+				background: #F0F0F0;
+				display: -webkit-box;
+			}
+			
+			.IM-Chat_footerInput {
+				height: 30px;
+				line-height: 30px;
+				margin: 0px 20px;
+				-webkit-box-flex: 1;
+			}
+			
+			.IM-Chat_footerSend {
+				height: 30px;
+				width: 30px;
+				margin-right: 10px;
+				font-size: 20px;
+				text-align: center;
+				line-height: 30px;
+			}
+			
+			.IM-Chat_footerSend:active {
+				color: blue;
+			}
+			
+			.IM-Chat_content {
+				width: 100%;
+				margin:60px 0px;
+			}
+			
+			.IM-Chat_content ul li {
+				overflow: hidden;
+			}
+			
+			.IM-Chat_content_left,.IM-Chat_content_right {
+				padding: 10px 15px;
+			}
+			
+			.leftImg,
+			.rightImg {
+				width: 40px;
+			}
+			
+			.leftTxt {
+				margin-left: 20px;
+				padding: 5px 10px;
+				border-radius: 3px;
+				margin-top: 5px;
+				max-width: 50%;
+				word-break: break-word;
+				background: #1284FE;
+				color: white;
+				font-size: 16px;
+			}
+			
+			.rightTxt {
+				margin-right: 20px;
+				padding: 5px 10px;
+				border-radius: 3px;
+				margin-top: 5px;
+				max-width: 50%;
+				word-break: break-word;
+				background: #EEEEEE;
+				color: #666666;
+				font-size: 16px;
+			}
+			
+			.cart_jiao {
+				display: block;
+				border: 8px solid;
+				border-color: #FFF #1284FE #FFF #FFF;
+				left: 59px;
+				top: 20px;
+			}
+			.cart_jiao_right{
+			display: block;
+				border: 8px solid;
+				border-color: #FFF #FFF #FFF #EEEEEE;
+				right: 59px;
+				top: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="IM-Chat_top top_blue">
+			<a href="IM.html" class="IM-Chat_topFanhui Hui-iconfont Hui-iconfont-close"></a>
+			<span class="IM-Chat_topName">我不知道该叫什么</span>
+		</div>
+
+		<div class="IM-Chat_content">
+			<ul>
+				<li class="IM-Chat_content_left position-r">
+					<img class="b_radus leftImg fl" src="img/personal/SKa2or.jpeg" />
+					<span class="cart_jiao position-a"></span>
+					<div class="leftTxt fl">你说我应该说点啥，说点知乎么，这个傻逼APP，能做出来也不错，哈哈哈哈</div>
+				</li>
+				<li class="IM-Chat_content_right position-r">
+					<span class="cart_jiao_right position-a"></span>
+					<img class="rightImg b_radus fr" src="img/personal/SKa2or.jpeg" />
+					<div class="rightTxt fr">这个APP准备练习各种框架，会的还是太少，妈的，又睡不了觉了，好想歇几天</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="IM-Chat_footer">
+			<div contenteditable class="IM-Chat_footerInput"></div>
+			<div class="IM-Chat_footerSend font-weight Hui-iconfont Hui-iconfont-fabu"></div>
+		</div>
+
+	</body>
+
+</html>

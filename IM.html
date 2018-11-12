@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+	</head>
+	<style type="text/css">
+		.IM_top {
+			height: 50px;
+			width: 100%;
+			position: fixed;
+			top: 0px;
+		}
+		
+		.IM_content {
+			margin: 50px 0px;
+		}
+		
+		.IM_top_txt {
+			color: white;
+			font-weight: bolder;
+			font-family: "微软雅黑";
+			font-size: 20px;
+			line-height: 50px;
+			margin-left: 20px;
+		}
+		
+		.IM_content_people {
+			border-bottom: 1px solid #eee;
+			box-shadow: 0px 1px 3px #eee;
+			height: 50px;
+			-webkit-box-align: center;
+			display: -webkit-box;
+		}
+		
+		.IM_content_people:active {
+			background: #F5F5F5;
+		}
+		
+		.IM_content_peopleImg {
+			background: #666;
+			width: 30px;
+			height: 30px;
+			margin: 0px 20px;
+		}
+		
+		.IM_content_peopleName {
+			height: 30px;
+			margin-right: 20px;
+			-webkit-box-flex: 1;
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<!--
+        	作者：530929822@qq.com
+        	时间：2017-03-29
+        	描述：私信聊天页
+        -->
+		<!--顶部开始-->
+		<div class="IM_top top_blue">
+			<span class="IM_top_txt">私信</span>
+		</div>
+		<!--顶部结束-->
+		<!--内容开始-->
+		<div class="IM_content">
+			<!--数据1-->
+			<a @click='IM'>
+				<div class="IM_content_people">
+					<!--<div class="IM_content_peopleImg b_radus"><img class="width-100B b_radus" src="img/personal/266007025355415553.jpg"/></div>-->
+					<div class="IM_content_peopleName font-size16 font_color6">公共聊天室</div>
+				</div>
+			</a>
+		</div>
+		<!--内容结束-->
+		<!--底部按钮开始-->
+		<div class="weui-tabbar">
+			<a href="index.html" class="weui-tabbar__item ">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-share-zhihu"></p>
+			</a>
+			<a href="found.html" class="weui-tabbar__item">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-canshu"></p>
+			</a>
+			<a href="IM.html" class="weui-tabbar__item">
+				<p class="footertab_blue weui-tabbar__label Hui-iconfont Hui-iconfont-msg"></p>
+			</a>
+			<a href="personal.html" class="weui-tabbar__item">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-menu"></p>
+			</a>
+		</div>
+		<!--底部按钮结束-->
+	</body>
+	<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		if (sessionStorage.getItem("夜间")) {
+			$("body").attr("style", "background-image: url(img/index/timg.jpg);color: white; background-size: cover;")
+		}
+		var vue = new Vue({
+			el: "body",
+			methods: {
+				IM: function() {
+					if (sessionStorage.getItem("登录")) {
+						location.href='IMCart.html'
+					} else {
+						$.alert("请您登录后在进入聊天室！", "未登录！");
+					}
+				}
+			}
+		})
+	</script>
+
+</html>

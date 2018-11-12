@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>帖子</title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/amazeui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/Buttons.css"/>
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/base/base.css"/>
+		<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/base/amazeui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/base/base.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.index_top {
+				height: 50px;
+				width: 100%;
+				position: fixed;
+				top: 0px;
+				z-index: 999;
+				display: -webkit-box;
+				-webkit-box-align: center;
+			}
+			
+			.index_content {
+				margin: 50px 0px;
+			}
+			
+			.index_topLeft {
+				display: -webkit-box;
+				width: 40px;
+				font-size: 30px;
+				font-weight: bolder;
+				color: white;
+				margin-left: 10px;
+			}
+			
+			.index_topCenter {
+				border-radius: 5px;
+				border: 1px solid rgba(4, 91, 178, 1);
+				display: -webkit-box;
+				-webkit-box-align: center;
+				height: 35px;
+				-webkit-box-flex: 1;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.index_topInput {
+				display: -webkit-box;
+				-webkit-box-flex: 1;
+				height: 20px;
+				font-size: 14px;
+				color: #666666;
+				margin: 0px 10px;
+				outline: none;
+				border: none;
+				background: inherit;
+			}
+			
+			.index_topSearch {
+				display: -webkit-box;
+				background: rgba(14, 120, 230, 1);
+				height: 100%;
+				color: white;
+				font-size: 22px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.index_topRight {
+				display: -webkit-box;
+				margin: 0px 10px;
+				width: 35px;
+				font-size: 30px;
+				font-weight: bolder;
+				color: white;
+			}
+			
+			.close {
+				right: 10px;
+			}
+			
+			.index_content_news {
+				border-bottom: 5px solid #eee;
+				padding: 10px;
+			}
+			
+			.index_content_news_title {
+				margin: 10px 0px;
+			}
+			
+			.index_content_news_txt {
+				-webkit-box-orient: vertical;
+				display: -webkit-box;
+				overflow: hidden;
+				-webkit-line-clamp: 3;
+			}
+			.index_content_news_txt img{
+				width: 100%;
+			}
+			
+			.top_ce {
+				margin-top: 10px;
+			}
+			
+			.top_ce_content {
+				/*border: 1px solid;*/
+				padding: 10px 10px;
+			}
+			
+			.top_ce_content ul>li {
+				padding: 10px;
+				margin-left: 13px;
+			}
+			
+			li {
+				list-style-type: none;
+			}
+			
+			.top_ce_content:active {
+				background-color: #555;
+			}
+			
+			.top_ce_contentImg {
+				width: 30px;
+				height: 30px;
+				padding: 5px;
+				font-size: 12px;
+				text-align: center;
+				margin-right: 20px;
+				color: rgba(255, 255, 255, 1);
+			}
+			
+			.top_ce_contentJT {
+				width: 30px;
+				height: 30px;
+			}
+			
+			.top_ce_contentTxt {
+				-webkit-box-flex: 1;
+				font-size: 16px;
+				height: 30px;
+			}
+			
+			/*.sendTie {
+				position: fixed;
+				border-radius: 50%;
+				bottom: 70px;
+				right: 20px;
+				width: 50px;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				z-index: 888;
+				color: white;
+				font-weight: bold;
+				background: rgba(255, 255, 0, 1);
+			}*/
+			
+			.sendTieDiv {
+				position: fixed;
+				top: 0px;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				margin: auto;
+				border: 1px solid #999;
+				background: rgba(240, 240, 240, 1);
+				z-index: 1000;
+				width: 100%;
+				height: 300px;
+				overflow: auto;
+				display: none;
+			}
+			.sendTieDiv .button{
+				position: absolute;
+				bottom: 0px;
+				width: 100%;
+			}
+			.sendTieTitle {
+				outline: none;
+				margin: 15px;
+				color: #666;
+				font-size: 16px;
+				line-height: 35px;
+				border-bottom: 2px solid rgba(14, 120, 230, 1);
+			}
+			
+			.sendTieTxt {
+				outline: none;
+				margin: 15px;
+				color: #666;
+				font-size: 16px;
+			}
+			
+			.sendFenlei {
+				outline: none;
+				margin: 15px;
+				color: #666;
+				font-size: 16px;
+			}
+			
+			.sendTieTitle:empty:before,
+			.sendTieTxt:empty:before,
+			.sendFenlei:empty:before {
+				content: attr(placeholder);
+			}
+		</style>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			if (sessionStorage.getItem("夜间")) {
+		$("body").attr("style","background-image: url(img/index/timg.jpg);color: white; background-size: cover;")
+	}
+		</script>
+		<!--顶部开始-->
+		<div class="index_top top_blue ">
+			<div class="index_topLeft Hui-iconfont Hui-iconfont-share-zhihu "></div>
+			<div class="index_topCenter ">
+				<input type="text " v-model='selectInput' placeholder="搜索你感兴趣的内容... " class="index_topInput " />
+				<div class="index_topSearch Hui-iconfont Hui-iconfont-search2 "></div>
+			</div>
+
+			<!-- 按钮触发器， 需要指定 target -->
+			<div class="index_topRight Hui-iconfont Hui-iconfont-fenlei " data-am-offcanvas="{target: '#doc-oc-demo2', effect: 'push'}"></div>
+
+			<!-- 侧边栏内容 -->
+			<div id="doc-oc-demo2" class="am-offcanvas">
+				<div class="am-offcanvas-bar">
+					<div class="am-offcanvas-content">
+						<!--开始-->
+						<div class="top_ce">
+							<!--<a href="javascript:;">
+								<div class="top_ce_content">
+									<div class="top_ce_contentImg Hui-iconfont Hui-iconfont-fenlei bg_color-zise b_radus"></div>
+									<div class="top_ce_contentTxt">分类浏览</div>
+									<div class="top_ce_contentJT  Hui-iconfont Hui-iconfont-arrow2-right"></div>
+								</div>
+							</a>
+							<a href="javascript:;">
+								<div class="top_ce_content">
+									<div class="top_ce_contentImg Hui-iconfont Hui-iconfont-face bg_color_danhuang b_radus"></div>
+									<div class="top_ce_contentTxt">热门精选</div>
+									<div class="top_ce_contentJT  Hui-iconfont Hui-iconfont-arrow2-right"></div>
+								</div>
+							</a>
+							<a href="javascript:;">
+								<div class="top_ce_content">
+									<div class="top_ce_contentImg Hui-iconfont Hui-iconfont-yuedu bg_color_danlan b_radus"></div>
+									<div class="top_ce_contentTxt">我的订阅</div>
+									<div class="top_ce_contentJT  Hui-iconfont Hui-iconfont-arrow2-right"></div>
+								</div>
+							</a>-->
+
+							<ul class="top_ce_content">
+								<li>
+									<a data-am-collapse="{parent: '#collapase-nav-1', target: '#user-nav'}" @click='fenleiRead'>
+										<i class="top_ce_contentImg  bg_color-zise b_radus  Hui-iconfont Hui-iconfont-fenlei  am-margin-left-sm"></i> 分类浏览 <i class=" Hui-iconfont Hui-iconfont-arrow2-right am-fr am-margin-right"></i>
+									</a>
+									<ul class=" am-collapse " id="user-nav">
+										<li>
+											<a @click='FL_qianduan' v-html='fenleiArr[0]'></a>
+										</li>
+										<li>
+											<a @click='FL_yuedu' v-html='fenleiArr[1]'> </a>
+										</li>
+										<li>
+											<a @click='FL_music' v-html='fenleiArr[2]'> </a>
+										</li>
+										<li>
+											<a @click='FL_IT' v-html='fenleiArr[3]'> </a>
+										</li>
+										<li>
+											<a @click='FL_shejiao' v-html='fenleiArr[4]'> </a>
+										</li>
+										<li>
+											<a @click="FL_xinwen" v-html='fenleiArr[8]'> </a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<ul class="top_ce_content">
+								<li>
+									<a href="found.html">
+										<i class="top_ce_contentImg Hui-iconfont Hui-iconfont-face bg_color_danhuang b_radus  am-margin-left-sm"></i> 热门精选 <i class=" Hui-iconfont Hui-iconfont-arrow2-right am-fr am-margin-right"></i>
+									</a>
+								</li>
+							</ul>
+							<!--<ul class="top_ce_content">
+								<li>
+									<a data-am-collapse="{parent: '#collapase-nav-1', target: '#myRead'}">
+										<i class="top_ce_contentImg  Hui-iconfont Hui-iconfont-yuedu bg_color_danlan b_radus  am-margin-left-sm"></i> 我的订阅 <i class=" Hui-iconfont Hui-iconfont-arrow2-right am-fr am-margin-right"></i>
+									</a>
+									<ul class=" am-collapse " id="myRead">
+										<li><a href="#/userAdd"> 添加人员 </a></li>
+										<li><a href="#/userList/0"> 人员列表 </a></li>
+									</ul>
+								</li>
+							</ul>-->
+						</div>
+						<!--结束-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--顶部结束-->
+
+		<!--内容开始-->
+		<!--loading加载-->
+		<div class="csshub-loading" v-if='loadingShow'>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<div id="content" style="display: none;">
+		<div class="index_content" v-if='isShow'>
+			<!--发帖1 v-if-->
+			<div class="index_content_news position-r" @click='index($index)' v-for="item in list">
+				<!--X关闭的按钮-->
+				<!--<span class="position-a  Hui-iconfont Hui-iconfont-close close font_color9"></span>-->
+				<div class="index_content_news_top">
+					<!--<img class="width-20 b_radus" src="img/personal/266007025355415553.jpg"/>-->
+					<span class="font_color9 font-size14">热门内容.来自：
+						<span  v-html='item.fenlei'>
+							<!--分类-->
+						</span>
+					</span>
+				</div>
+				<div class="index_content_news_title font-size16 font-weight" v-html='item.title'>
+					<!--帖子标题-->
+				</div>
+				<div class="index_content_news_txt font-size14" v-html='item.context'>
+					<!--帖子内容-->
+				</div>
+				<div class="font-size14 font_color9 margin-TB5">
+					<span class="index_dianzan"><span v-html='item.n_zan'>
+						<!--点赞数-->
+					</span> 点赞</span> · <span class="index_dianzan"><span v-html='item.n_ping'>
+						<!--评论数-->
+					</span>评论</span>
+					· <span class="index_yueduNum"><span>0</span> 阅读量</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="index_content" v-else>
+			<!--发帖1 v-else-->
+			<div class="index_content_news position-r" @click='index2($index)' v-for='b in list[0].List'>
+				<!--X关闭的按钮-->
+				<!--<span class="position-a  Hui-iconfont Hui-iconfont-close close font_color9"></span>-->
+				<div class="index_content_news_top">
+					<!--<img class="width-20 b_radus" src="img/personal/266007025355415553.jpg"/>-->
+					<span class="font_color9 font-size14">热门内容.来自：
+						<span  v-html='b.fenlei'>
+							<!--分类-->
+						</span>
+					</span>
+				</div>
+				<div class="index_content_news_title font-size16 font-weight" v-html='b.title'>
+					<!--帖子标题-->
+				</div>
+				<div class="index_content_news_txt font-size14" v-html='b.context'>
+					<!--帖子内容-->
+				</div>
+				<div class="font-size14 font_color9 margin-TB5">
+					<span class="index_dianzan"><span v-html='b.n_zan'>
+						<!--点赞数-->
+					</span> 点赞</span> · <span class="index_dianzan"><span v-html='b.n_ping'>
+						<!--评论数-->
+					</span>评论</span>
+					· <span class="index_yueduNum"><span>0</span> 阅读量</span>
+				</div>
+			</div>
+		</div>
+</div>
+		<!--内容结束-->
+		<!--底部按钮开始-->
+		<div class="weui-tabbar footer ">
+			<a href="index.html " class="weui-tabbar__item ">
+				<p class="footertab_blue weui-tabbar__label Hui-iconfont Hui-iconfont-share-zhihu "></p>
+			</a>
+			<a href="found.html " class="weui-tabbar__item ">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-canshu "></p>
+			</a>
+			<a href="IM.html " class="weui-tabbar__item ">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-msg "></p>
+			</a>
+			<a href="personal.html " class="weui-tabbar__item ">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-menu "></p>
+			</a>
+		</div>
+		<!--底部按钮结束-->
+
+		<div id="top" class="sendTie" ></div>
+
+		<div class="sendTieDiv">
+			<div class="sendTieTitle" placeholder='请输入标题' contenteditable="true"></div>
+			<div class="sendTieTxt" placeholder='请输入内容' contenteditable="true"></div>
+			<div class="sendFenlei" placeholder='分类(前端、阅读、音乐、互联网、社交)' contenteditable="true"></div>
+			 <a @click='sendTiwen'  class="button button-block button-rounded button-primary button-large">发帖</a>
+		</div>
+	</body>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var ss;
+		var dd;
+		var time = new Date().toLocaleString();
+		var title = $(".sendTieTitle").html();
+		var txt = $(".sendTieTxt").html();
+		var FL = $(".sendFenlei").html();
+		$.ajax({
+			type: 'get',
+			//async:false,
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				//所有帖子
+				$.ajax({
+					type: 'get',
+					url: "http://v2.mashupcloud.cn/SQL/sele_tie/",
+					data: {
+						appid: dd,
+						token: ss,
+						name: 'sele_tie',
+					},
+					success: function(json) {
+						var vue = new Vue({
+							el: "body",
+							data: {
+								list: JSON.parse(json)[2], //数组
+								fenleiArr: [],
+								loadingShow:true,
+								isShow: true, //v-if的显示
+								selectInput: "" //搜索框双向绑定，初始值为空
+							},
+							watch: {
+								selectInput: function() { //监听搜索框是否变化做Ajax
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_mohu/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_mohu',
+											_v1: $(".index_topInput").val(),
+											_v2: $(".index_topInput").val(),
+										},
+										success: function(json) {
+											JSON.parse(json)[2] //返回数据[]
+											obj = {
+												List: JSON.parse(json)[2] //拿出数据放入{}
+											}
+											vue.list = []; //清空之前查询的
+											vue.list.push(obj); //创建的json放入空数组list里
+											//											console.log(JSON.parse(json)[2])
+										}
+									});
+									if ($(".index_topInput").val().length >= 1) {
+										this.isShow = false; //搜索框的值大于等于1是v-if隐藏
+									}
+								}
+							},
+							methods: {
+								//前端分类
+								FL_qianduan: function() {
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "前端"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//分类阅读
+								FL_yuedu:function(){
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "阅读"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//分类音乐
+								FL_music:function(){
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "音乐"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//分类互联网
+								FL_IT:function(){
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "互联网"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//分类社交
+								FL_shejiao:function(){
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "社交"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//分类新闻
+								FL_xinwen:function(){
+									vue.isShow=false;
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie_lei/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie_lei',
+											_v1: "新闻"
+										},
+										success: function(json) {
+											obj = {
+												List: JSON.parse(json)[2]
+											}
+											vue.list = [];
+											vue.list.push(obj)
+											console.log(vue.list)
+										}
+									});
+								},
+								//v-if模板所跳链接
+								index: function(index) {
+									//									console.log(this.list[index].id)
+									location.href = "card.html?" + "index=" + encodeURI(this.list[index].id);
+								},
+								//v-else模板所跳链接
+								index2: function(index) {
+									location.href = "card.html?" + "index=" + encodeURI(this.list[0].List[index].id);
+									//									console.log(this.list[0].List[index].id)
+								},
+								fenleiRead: function() {
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_tie/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_tie'
+										},
+										success: function(json) {
+											for (var i = 0; i < JSON.parse(json)[2].length; i++) {
+												vue.fenleiArr.push(JSON.parse(json)[2][i].fenlei)
+											}
+																						console.log($.unique(vue.fenleiArr))
+										}
+									});
+								},
+								sendTiwen:function(){
+									if ($(".sendTieTxt").html() != "" && $(".sendTieTitle").html() != "") {
+											$.ajax({
+												type: "get",
+												url: "http://v2.mashupcloud.cn/SQL/into_tie/",
+												data: {
+													appid: dd,
+													token: ss,
+													name: 'into_tie',
+													_v1: $(".sendTieTitle").html(),
+													_v2: $(".sendTieTxt").html(),
+													_v3: sessionStorage.getItem("登录"),
+													_v4: time,
+													_v5: 0,
+													_v6: $(".sendFenlei").html()
+												},
+												success: function() {
+													obj = {
+														title: $(".sendTieTitle").html(),
+														context: $(".sendTieTxt").html(),
+														user_id: 4,
+														time: time,
+														money: 0,
+														fenlei: $(".sendFenlei").html()
+													}
+													vue.list.unshift(obj)
+												}
+											});
+										}
+									$(".sendTieDiv").hide(1000);
+								},
+								sendInputShow: function() {
+									if (sessionStorage.getItem("登录")) {
+										$(".sendTieDiv").show(1000);
+										} else{
+											$.alert("请您登录后在发帖！", "未登录！");
+										}
+										
+										console.log(111)
+								}
+							}
+						})
+
+						vue.loadingShow=false
+						$("#content").attr("style","display:block;")
+						console.log(vue.isShow)
+						
+					},
+					error: function(json) {
+						console.log("注册失败");
+					}
+				});
+			}
+		});
+								
+		function send() {
+			var sendTieTitle = $(".sendTieTitle").html();
+			var sendTieTxt = $(".sendTieTxt").html();
+			var sendFenlei = $(".sendFenlei").html();
+			if ($(".sendTie").html() == "发贴") {
+				$(".sendTie").html("提问");
+				$(".sendTieDiv").hide(1000);
+				if (sendTieTxt != "" && sendTieTitle != "") {
+					$(".index_content").prepend('<div class="index_content_news position-r" ><span class="position-a  Hui-iconfont Hui-iconfont-close close font_color9"></span><div class="index_content_news_top"><span class="font_color9 font-size14">热门内容.来自：<span>' + sendFenlei + '</span></span></div><div class="index_content_news_title font-size16 font-weight">' + sendTieTitle + '</div><div class="index_content_news_txt font-size14">' + sendTieTxt + '</div><div class="font-size14 font_color9 margin-TB5"><span class="index_dianzan"><span>0</span> 点赞</span> · <span class="index_dianzan"><span>0</span>评论</span>· <span class="index_yueduNum"><span>0</span> 阅读量</span></div></div>')
+				}
+			} else {
+				$(".sendTie").html("发贴")
+				$(".sendTieDiv").show(1000);
+			}
+		}
+		
+		
+		
+	</script>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+	</head>
+	<style type="text/css">
+		.personal_centerTop {
+			position: fixed;
+			top: 0px;
+			height: 50px;
+			width: 100%;
+			display: -webkit-box;
+		}
+		
+		.top_fanhui {
+			width: 50px;
+			font-size: 20px;
+			text-align: center;
+			line-height: 50px;
+			color: #FFF;
+		}
+		
+		.top_name {
+			-webkit-box-flex: 1;
+			font-size: 18px;
+			line-height: 50px;
+			color: #FFF;
+		}
+		
+		.content {
+			padding: 49px 0px;
+		}
+		
+		.content_title {
+			height: 200px;
+		}
+		
+		.content_touxiang {
+			width: 100px;
+			left: 0px;
+			right: 0px;
+			top: 0px;
+			bottom: 0px;
+			margin: auto;
+		}
+		
+		.content_txt {
+			text-align: center;
+			left: 0px;
+			right: 0px;
+			bottom: 5px;
+			margin: auto;
+			color: #FFF;
+		}
+		
+		.content_type {
+			height: 140px;
+			border-bottom: 5px solid #eee;
+			box-shadow: 0px 1px 10px #ddd;
+		}
+		
+		.huati {
+			width: 100%;
+			height: 50px;
+			display: -webkit-box;
+			text-align: center;
+			line-height: 50px;
+			border-top: 5px solid #DDDDDD;
+		}
+		
+		.huati_1 {
+			width: 50%;
+		}
+		
+		.huati_2 {
+			-webkit-box-flex: 1;
+		}
+		
+		.huatiNum {
+			width: 100%;
+			display: -webkit-box;
+			text-align: center;
+		}
+		
+		.dianzanNum {
+			margin: 0px 10px;
+		}
+		
+		.num {
+			padding: 20px 10px;
+		}
+	</style>
+
+	<body>
+		<div class="personal_centerTop top_blue">
+			<div onclick="location.href='personal.html'" class="top_fanhui Hui-iconfont Hui-iconfont-slider-left"></div>
+			<div class="top_name font-weight">SKa2or</div>
+		</div>
+
+		<div class="content">
+			<div class="content_title top_blue position-r">
+				<img class="content_touxiang b_radus position-a" src="img/personal/SKa2or.jpeg" />
+				<div class="content_txt position-a font-size16 font-weight">个人主页</div>
+			</div>
+			<!--关注的话题，关注的人-->
+			<div class="content_type">
+				<div class="huati">
+					<div onclick="location.href='#'" class="huati_1 font_color9 font-size14">关注的话题</div>
+					<div onclick="location.href='#'" class="huati_2 font_color9 font-size14">关注的人</div>
+				</div>
+				<div class="huatiNum">
+					<div class="huati_1 font_color6 font-size16">3</div>
+					<div class="huati_2 font_color6 font-size16">7</div>
+				</div>
+				<div class="num">
+					<span class="Hui-iconfont Hui-iconfont-zan font_color9 m_left10"></span><span class="dianzanNum font-size16 font-weight">18</span>
+					<span class="Hui-iconfont Hui-iconfont-yiguanzhu m_left10 font_color9"></span> <span class="guanzhuNum m_left10 font-weight font-size16">35</span>
+				</div>
+			</div>
+			<!--
+            	作者：530929822@qq.com
+            	时间：2017-03-31
+            	描述：我的Live、提问、收藏
+            -->
+            <div class="weui-panel__bd">
+				<div class="weui-media-box weui-media-box_small-appmsg">
+					<div class="weui-cells">
+					<a class="weui-cell weui-cell_access" href="javascript:;">
+							<div class="Hui-iconfont Hui-iconfont-feedback1 font_color6 m_right10"></div>
+							<div class="weui-cell__bd weui-cell_primary">
+								<p class="font-size14 font_color6">我的提问</p>
+							</div>
+							<span class="MyTiwenNum font_color6">0</span>
+						</a>
+						<a class="weui-cell weui-cell_access" href="collection.html">
+							<div class="Hui-iconfont Hui-iconfont-cang-selected font_color6 m_right10"></div>
+							<div class="weui-cell__bd weui-cell_primary">
+								<p class="font-size14 font_color6">我的收藏</p>
+							</div>
+							<span class="MyShoucangNum font_color6">0</span>
+						</a>
+						<a class="weui-cell weui-cell_access" href="javascript:;">
+							<div class="Hui-iconfont Hui-iconfont-github font_color6 m_right10"></div>
+							<div class="weui-cell__bd weui-cell_primary">
+								<p class="font-size14 font_color6">我的Live</p>
+							</div>
+						</a>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--底部按钮开始-->
+		<div class="weui-tabbar footer ">
+			<a href="index.html " class="weui-tabbar__item ">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-share-zhihu "></p>
+			</a>
+			<a href="found.html " class="weui-tabbar__item ">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-canshu "></p>
+			</a>
+			<a href="IM.html " class="weui-tabbar__item ">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-msg "></p>
+			</a>
+			<a href="personal.html " class="weui-tabbar__item ">
+				<p class="footertab_blue weui-tabbar__label Hui-iconfont Hui-iconfont-menu "></p>
+			</a>
+		</div>
+		<!--底部按钮结束-->
+	</body>
+
+</html>

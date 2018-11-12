@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>帖子</title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css"/>
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				border: 0px;
+				text-decoration: none;
+			}
+			
+			.cardTop {
+				height: 50px;
+				position: fixed;
+				z-index: 999;
+				top: 0px;
+				width: 100%;
+				display: -webkit-box;
+			}
+			
+			.card_close {
+				font-size: 26px;
+				margin-left: 20px;
+				font-weight: bold;
+				color: rgba(255, 255, 255, 1);
+				line-height: 50px;
+			}
+			
+			.cardTop_txt {
+				font-weight: bold;
+				font-size: 22px;
+				display: block;
+				width: 50px;
+				line-height: 50px;
+				margin-left: 30px;
+				color: rgba(255, 255, 255, 1);
+			}
+			
+			.cardFooter {
+				height: 50px;
+				width: 100%;
+				position: fixed;
+				bottom: 0px;
+				border-top: 1px solid rgba(209, 209, 209, 1);
+				background: rgba(255, 255, 255, 1);
+				display: -webkit-box;
+			}
+			
+			.cardFooter_dianzan {
+				width: 50px;
+				font-size: 26px;
+				line-height: 50px;
+				text-align: center;
+			}
+			
+			.cardFooter_kong {
+				-webkit-box-flex: 1;
+			}
+			
+			.cardFooter_thank {
+				width: 50px;
+				font-size: 26px;
+				line-height: 50px;
+				text-align: center;
+			}
+			
+			.cardFooter_collection {
+				width: 50px;
+				font-size: 26px;
+				line-height: 50px;
+				text-align: center;
+			}
+			
+			.cardFooter_comment {
+				width: 50px;
+				font-size: 26px;
+				line-height: 50px;
+				text-align: center;
+			}
+			
+			.cardContent {
+				height: 100%;
+				margin: 50px 0px;
+			}
+			
+			.cardContent_title {
+				height: 100px;
+				color: rgba(255, 255, 255, 1);
+				font-size: 18px;
+				line-height: 100px;
+				text-align: center;
+				overflow: hidden;
+			}
+			
+			.cardContent_name {
+				height: 50px;
+				display: -webkit-box;
+				border-bottom: 1px solid rgba(224, 224, 224, 1);
+			}
+			
+			.cardContent_nameImg {
+				width: 40px;
+				margin: 5px 10px;
+			}
+			
+			.cardContent_nameImg img {
+				width: 100%;
+			}
+			
+			.cardContent_nameTxt {
+				-webkit-box-flex: 1;
+				line-height: 50px;
+				font-size: 16px;
+				width: 100%;
+			}
+			.cardContent_text img{
+				width:100%;
+			}
+			.cardContent_nameGuanzhu {
+				width: 100px;
+				display: -webkit-box;
+				-webkit-box-align: center;
+			}
+			
+			.cardContent_nameGuanzhu div {
+				display: -webkit-box;
+				border: 1px solid rgba(209, 209, 209, 1);
+				line-height: 30px;
+				padding: 0px 10px;
+				width: 50px;
+				height: 30px;
+				/*background: #0000FF;*/
+				color: #666;
+				
+			}
+			
+			.cardContent_text {
+				position: relative;
+				word-break: break-word;
+			}
+			
+			.cardContent_text span {
+				position: absolute;
+				left: 0px;
+				right: 0px;
+				margin: 10px auto;
+				display: block;
+				width: 85%;
+			}
+			.blue {
+				color: rgba(6, 100, 194, 1);
+			}
+			.green{
+				color: rgba(78,195,13,1);
+			}
+			.red {
+				color: red;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="top_blue cardTop">
+			<a href="index.html"><span class="Hui-iconfont Hui-iconfont-close card_close"></span></a>
+			<span class="cardTop_txt">帖子</span>
+		</div>
+
+		<div class="cardContent ">
+			<div class="cardContent_title top_blue" v-html='list.title'></div>
+			<!--loading加载-->
+		<div style="margin-top: 100px;" class="csshub-loading" v-if>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+			<div class="cardContent_name">
+				<div class="cardContent_nameImg "><img class="b_radus" src="img/personal/266007025355415553.jpg" /></div>
+				<div class="cardContent_nameTxt" v-html='name'>
+					<!--发帖人ID-->
+				</div>
+				<div  class="cardContent_nameGuanzhu">
+					<div @click='guanzhu' class="guanzhu Hui-iconfont Hui-iconfont-add">关注</div>
+				</div>
+			</div>
+			<div class="cardContent_text">
+				<span v-html='list.context'></span>
+			</div>
+		</div>
+
+		<div class="cardFooter">
+			<div @click='dianzan' :class="{ blue: isActive }" class="cardFooter_dianzan Hui-iconfont Hui-iconfont-zan2"></div>
+			<div  class="cardFooter_kong"></div>
+			<div @click='like' :class="{red:isActive}" class="cardFooter_thank Hui-iconfont Hui-iconfont-like"></div>
+			<div @click='collection' :class="{red:isActive}" class="cardFooter_collection Hui-iconfont Hui-iconfont-cang2"></div>
+			<div @click="comment" class="cardFooter_comment Hui-iconfont Hui-iconfont-comment"></div>
+		</div>
+	</body>
+	<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		//接URL参数
+		var loc = location.href;
+		var n1 = loc.length; //地址的总长度
+		var n2 = loc.indexOf("="); //取得=号的位置
+		var index = decodeURI(loc.substr(n2 + 1, n1 - n2)); //从=号后面的内容
+		//接URL参数
+
+		var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			//async:false,
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+
+			},
+			success: function(json) {
+				//		            console.log(json);
+				console.log(json)
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				//根据发贴人的id查找信息开始
+				$.ajax({
+					type: 'get',
+					url: "http://v2.mashupcloud.cn/SQL/sele_tie_id/",
+					data: {
+						appid: dd,
+						token: ss,
+						name: 'sele_tie_id',
+						_v1: index
+					},
+					success: function(json) {
+						$.ajax({
+							type: "get",
+							url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+							data: {
+								appid: dd,
+								token: ss,
+								name: 'sele_user',
+								_v1: JSON.parse(json)[2][0].user_id //发帖人的id
+							},
+							success: function(json) {
+								vue.name = JSON.parse(json)[2][0].nicheng;
+							}
+						});
+						//根据发贴人的id查找信息结束
+						var vue = new Vue({
+								el: "body",
+								name: "",
+								isActive: false,
+								data: {
+									list: JSON.parse(json)[2][0],
+									name: ""
+								},
+								methods: {
+									comment: function() {
+										location.href = "comment.html?" + "index=" + encodeURI(index)
+									},
+									dianzan: function() {
+										vue.isActive = true;
+										console.log(vue.isActive)
+										$(".cardFooter_dianzan").addClass("blue");
+										$.ajax({
+											type: "get",
+											url: "http://v2.mashupcloud.cn/SQL/upda_tie_zan/",
+											data: {
+												appid: dd,
+												token: ss,
+												name: 'upda_tie_zan',
+												_v1:index
+											}
+										});
+									},
+									collection: function() {
+										if (sessionStorage.getItem("登录")) {
+											vue.isActive = true;
+										$(".cardFooter_collection").addClass("green")
+										} else{
+											$.alert("请您登录后在收藏！", "未登录！");
+										}
+										
+									},
+									like:function  () {
+											vue.isActive=true;
+										$(".cardFooter_thank").addClass("red")
+									},
+									guanzhu:function  () {
+										
+										if (sessionStorage.getItem("登录")) {
+											$(".cardContent_nameGuanzhu div").attr("style","color:white;background-color: #0664C2;")
+										} else{
+											$.alert("请您登录后在关注！", "未登录！");
+										}
+									}
+								}
+							})
+							//						console.log(JSON.parse(json)[2][0])
+					},
+					error: function(json) {
+						console.log("注册失败");
+					}
+				})
+			}
+		});
+
+		function ajax() {
+			$.ajax({
+				type: "get",
+				url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+				data: {
+					appid: dd,
+					token: ss,
+					name: 'sele_user',
+					_v1: JSON.parse(json)[2][0].user_id
+				},
+				success: function() {
+
+				}
+			});
+		}
+	</script>
+
+</html>

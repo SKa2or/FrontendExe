@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/Buttons.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/jqueryweui.css" />
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				border: 0px;
+			}
+			
+			body {
+				background: #F7FAFC;
+			}
+			
+			.logo {
+				display: block;
+				width: 100px;
+				height: 100px;
+				margin: auto;
+				margin-top: 50px;
+				margin-bottom: 10px;
+				font-size: 100px;
+				font-weight: bolder;
+				color: #0F88EB;
+			}
+			
+			.txt {
+				display: block;
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+				font-size: 18px;
+				color: #666666;
+			}
+			
+			.mail {
+				width: 90%;
+				height: 50px;
+				border: 1px solid #D5D5D5;
+				margin: auto;
+				line-height: 50px;
+				text-align: center;
+				outline: none;
+				font-size: 16px;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.mail:empty:before {
+				content: attr(placeholder);
+				font-size: 18px;
+				color: #d5d5d5;
+			}
+			
+			.mail:focus:before {
+				content: none;
+			}
+			
+			.password {
+				display: block;
+				width: 90%;
+				height: 50px;
+				border: 1px solid #D5D5D5;
+				margin: 20px auto;
+				line-height: 50px;
+				text-align: center;
+				outline: none;
+				font-size: 16px;
+				background: rgba(255, 255, 255, 1);
+			}
+			
+			.button {
+				display: block;
+				width: 90%;
+				margin: auto;
+			}
+			
+			.login-reg {
+				height: 50px;
+				line-height: 70px;
+				display: block;
+				font-size: 14px;
+				width: 90%;
+				text-align: right;
+			}
+			
+			a {
+				color: #666666;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<span class="logo Hui-iconfont Hui-iconfont-share-zhihu"></span>
+		<span class="txt">积累知识，胜于积累金银</span>
+		<div class="mail" placeholder='账号登录' contenteditable="true"></div>
+		<input class="password" type="password" placeholder='密码' />
+		<a @click="send" class="button button-3d button-primary button-rounded">登录</a>
+		<span class="login-reg"><a href="register.html" >新用户注册</a></span>
+	</body>
+	<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/jquery-weui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				var vue = new Vue({
+						el: "body",
+						data:{
+							list:[]
+						},
+						methods: {
+							send: function() {
+								if ($(".mail").html() != "" && $(".password").val() != "") {
+									$.ajax({
+										type: "get",
+										url: "http://v2.mashupcloud.cn/SQL/sele_user_dl/",
+										data: {
+											appid: dd,
+											token: ss,
+											name: 'sele_user_dl',
+											_v1: $(".mail").html(),
+											_v2: $(".password").val()
+										},
+										success: function(json) {
+//											console.log(JSON.parse(json)[2])
+											if (JSON.parse(json)[2] == "") {
+												$.alert("账号密码错误", "登录失败！");
+											} else {
+												obj={
+													id:JSON.parse(json)[2][0].id,
+													name:JSON.parse(json)[2][0].nicheng
+												}
+												vue.list.push(obj)
+												console.log(vue.list)
+												sessionStorage.setItem("登录",JSON.parse(json)[2][0].id)
+												location.href='personal.html';
+											}
+										}
+									}); //查询是否有注册名结束AJAX
+								} else {
+									$.alert("请重新填写！", "填写不全！");
+								}
+							}
+						} //methods结束符
+					}) //vue结束符
+			},
+			error: function(json) {
+				console.log("初始化失败")
+			}
+		});
+	</script>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.csshub-loading {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.csshub-loading:before {
+  content: '';
+  width: 50px;
+  height: 5px;
+  background: #000;
+  opacity: 0.1;
+  position: absolute;
+  top: 59px;
+  left: 0;
+  border-radius: 50%;
+  animation: csshub-shadow .5s linear infinite;
+  -webkit-animation:  csshub-shadow .5s linear infinite;
+}
+
+.csshub-loading:after {
+  content: '';
+  width: 50px;
+  height: 50px;
+  /*background: blue;*/
+  animation: csshub-animate .5s linear infinite;
+  -webkit-animation: csshub-animate .5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#77b54d+0,67c454+4,91ce58+18,a5db5e+27,c4e261+36,eff268+56,fafc6c+66,fafc6c+66,fafc6c+66,feb645+100 */
+background: rgb(119,181,77); /* Old browsers */
+background: -moz-linear-gradient(45deg, rgba(119,181,77,1) 0%, rgba(103,196,84,1) 4%, rgba(145,206,88,1) 18%, rgba(165,219,94,1) 27%, rgba(196,226,97,1) 36%, rgba(239,242,104,1) 56%, rgba(250,252,108,1) 66%, rgba(250,252,108,1) 66%, rgba(250,252,108,1) 66%, rgba(254,182,69,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, rgba(119,181,77,1) 0%,rgba(103,196,84,1) 4%,rgba(145,206,88,1) 18%,rgba(165,219,94,1) 27%,rgba(196,226,97,1) 36%,rgba(239,242,104,1) 56%,rgba(250,252,108,1) 66%,rgba(250,252,108,1) 66%,rgba(250,252,108,1) 66%,rgba(254,182,69,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, rgba(119,181,77,1) 0%,rgba(103,196,84,1) 4%,rgba(145,206,88,1) 18%,rgba(165,219,94,1) 27%,rgba(196,226,97,1) 36%,rgba(239,242,104,1) 56%,rgba(250,252,108,1) 66%,rgba(250,252,108,1) 66%,rgba(250,252,108,1) 66%,rgba(254,182,69,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77b54d', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  
+}
+
+@keyframes csshub-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@-webkit-keyframes csshub-animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes csshub-shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+
+@-webkit-keyframes csshub-shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="csshub-loading">
+</div>
+	</body>
+
+</html>

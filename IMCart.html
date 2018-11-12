@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<style type="text/css">
+		
+		.IM-Chat_top {
+				top: 0px;
+				height: 50px;
+				display: -webkit-box;
+				line-height: 50px;
+				color: white;
+				position: fixed;
+				width: 100%;
+			}
+			
+			.IM-Chat_topFanhui {
+				width: 50px;
+				font-size: 18px;
+				margin: 0px 10px;
+				color: #FFF;
+				text-decoration: none;
+				text-align: center;
+			}
+			
+			.IM-Chat_topName {
+				-webkit-box-flex: 1;
+				font-size: 18px;
+				margin-left: 20px;
+			}
+			
+			.IM-Chat_footer {
+				position: fixed;
+				width: 100%;
+				bottom: 0px;
+				left: 0px;
+				height: 50px;
+				-webkit-box-align: center;
+				background: #F0F0F0;
+				display: -webkit-box;
+			}
+			
+			.IM-Chat_footerInput {
+				height: 30px;
+				line-height: 30px;
+				margin: 0px 20px;
+				display: block;
+				-webkit-box-flex: 1;
+				text-align: center;
+				outline: none;
+				border: none;
+				background-color: #F0F0F0;
+			}
+			
+			.IM-Chat_footerSend {
+				height: 30px;
+				width: 30px;
+				margin-right: 10px;
+				font-size: 20px;
+				text-align: center;
+				line-height: 30px;
+			}
+			
+			.IM-Chat_footerSend:active {
+				color: blue;
+			}
+			
+			.IM-Chat_content {
+				width: 100%;
+				margin: 60px 0px ;
+			}
+			
+			.IM-Chat_content ul li {
+				overflow: hidden;
+			}
+			
+			.IM-Chat_content_left,
+			.IM-Chat_content_right {
+				padding: 10px 15px;
+			}
+			
+			.leftImg,
+			.rightImg {
+				width: 40px;
+				height: 40px;
+			}
+			
+			.leftImg {
+				border: 1px solid;
+				text-align: center;
+			}
+			
+			.leftTxt {
+				margin-left: 18px;
+				padding: 5px 10px;
+				border-radius: 3px;
+				margin-top: 20px;
+				max-width: 50%;
+				word-break: break-word;
+				background: #1284FE;
+				color: white;
+				font-size: 16px;
+			}
+			
+			.rightTxt {
+				padding: 5px 10px;
+				border-radius: 3px;
+				margin-top: 5px;
+				max-width: 50%;
+				word-break: break-word;
+				background: #EEEEEE;
+				color: #666666;
+				font-size: 16px;
+			}
+			
+			.cart_jiao {
+				display: block;
+				border: 8px solid;
+				border-color: #FFF #1284FE #FFF #FFF;
+				left: 59px;
+				top: 20px;
+			}
+			
+			.cart_jiao_right {
+				display: block;
+				border: 8px solid;
+				border-color: #FFF #FFF #FFF #EEEEEE;
+				right: 59px;
+				top: 20px;
+			}
+			
+			.IM-Chat_content p {
+				margin: 10px 0px;
+				word-wrap: break-word;
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			
+			.strong {
+				color: #f00;
+			}
+			
+			.item {
+				margin: 10px 0px;
+			}
+			
+			.item p {
+				margin: 5px;
+				
+			}
+			
+			
+			.print-wall {
+				overflow: auto;
+				margin: 20px auto;
+				padding: 20px;
+				border: 1px solid #888;
+				max-height: 380px;
+				max-width: 800px;
+				width: 84%;
+				text-align: left;
+			}
+			
+			.print-wall p {
+				margin: 10px 0px;
+				word-wrap: break-word;
+			}
+			.name{
+				color: blue;
+				float: left;
+			}
+			.time{
+				display: block;
+				text-align: center;
+				font-size: 12px;
+			}
+			.FromName{
+				font-size: 12px;
+				color: blueviolet;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="IM-Chat_top top_blue">
+			<a href="IM.html" class="IM-Chat_topFanhui Hui-iconfont Hui-iconfont-close"></a>
+			<span class="IM-Chat_topName"></span>
+		</div>
+		<div class="IM-Chat_content">
+		<div class="item">
+			<ul id="print-wall" class="print-wall">
+			</ul>
+		</div>
+		</div>
+
+
+		<div class="IM-Chat_footer">
+			<input type="text" placeholder="请输入发送内容"  class="IM-Chat_footerInput"/>
+			<div class="IM-Chat_footerSend font-weight Hui-iconfont Hui-iconfont-fabu" onclick="sendInfo()"></div>
+		</div>
+
+
+
+		<!-- 引入 LeanCloud 存储 SDK -->
+		<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn1.lncld.net/static/js/av-min-1.0.0.js"></script>
+		<script src="js/IM/realtime.browser.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			async:true,
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				console.log(json)
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				$.ajax({
+					type: 'get',
+					url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+					async:true,
+					data: {
+						appid: dd,
+						token: ss,
+						name: 'sele_user',
+						_v1: sessionStorage.getItem("登录")
+					},
+					success: function(json) {
+						$(".IM-Chat_topName").html(JSON.parse(json)[2][0].nicheng)
+						//			 初始化存储 SDK
+			AV.init({
+				appId: 'Ivj24f8aJ1PSn1u9jc7H9NYY-gzGzoHsz',
+				appKey: 'IQgxKdLI3i8aBWBczx312LKk',
+			});
+//			 初始化实时通讯 SDK
+			var realtime;
+//			 每个客户端自定义的 id
+			var clientId = $(".IM-Chat_topName").html();
+//			 请换成你自己的一个房间的 conversation id（这是服务器端生成的）
+			var roomId = '58b2e3340ce463005876b478';
+			// 用来存储创建好的 roomObject
+			var room;
+			var inputName = $(".IM-Chat_topName");
+			var printWall = document.getElementById("print-wall");
+			var inputSend = $(".IM-Chat_footerInput");
+
+				clientId = inputName.html() ? inputName.html() : clientId;
+				// 创建实时通信实例
+				realtime = new AV.Realtime({
+					appId: 'JFGnbmzy4zUVWsHRDLID0VwL-gzGzoHsz',
+					plugins: [AV.TypedMessagesPlugin], // 注册富媒体消息插件
+				});
+				// 创建聊天客户端
+				realtime.createIMClient(clientId)
+					.then(function(client) {
+						showLog("学习知识，充实自己！");
+						//注册监听新消息事件
+						client.on('message', function(message, conversation) {
+							showLog("<span class='time'>" + formatTime(message.timestamp) + "</span><p class='FromName'>" + message.from +" ："+ "<p>", "<p class='leftTxt fl'>"+message.text+"</p>");
+						}); // 获取聊天室对话
+						//检测断线后重连
+						client.on('disconnect', function() {
+							showLog('[disconnect] 服务器连接已断开');
+						});
+						client.on('offline', function() {
+							showLog('[offline] 离线（网络连接已断开）');
+						});
+						client.on('online', function() {
+							showLog('[online] 已恢复在线');
+						});
+						client.on('schedule', function(attempt, time) {
+							showLog('[schedule] ' + time / 1000 + 's 后进行第 ' + (attempt + 1) + ' 次重连');
+						});
+						client.on('retry', function(attempt) {
+							showLog('[retry] 正在进行第 ' + (attempt + 1) + ' 次重连');
+						});
+						client.on('reconnect', function() {
+							showLog('[reconnect] 重连成功');
+						});
+						client.on('reconnecterror', function() {
+							showLog('[reconnecterror] 重连失败');
+						});
+						return client.getConversation(roomId);
+					}).then(function(conversation) {
+						//将当前成员连接到聊天室
+						return conversation.join();
+					}).then(function(conversation) {
+						// 获取聊天历史
+						room = conversation;
+						conversation.count().then(function(count) {
+							showLog('公共聊天室在线人数：', count);
+//							showLog('已经加入，可以开始聊天。');
+						});
+					});
+					
+					
+					
+					
+		sendInfo=	function () {
+				var val = inputSend.val();
+				// 不让发送空字符
+				if (!val.replace(/^\s+/, '').replace(/\s+$/, '')) {
+					alert('消息不能为空！');
+					return;
+				}
+				// 向这个房间发送消息，这段代码是兼容多终端格式的，包括 iOS、Android、Window Phone
+				room.send(new AV.TextMessage(val)).then(function(message) {
+					// 发送成功之后的回调
+					inputSend.value == '';
+					showLog('<span class="time">' + formatTime(message.timestamp) + '</span>', '<li class="IM-Chat_content_right position-r"><div class="rightTxt fr">'+encodeHTML(message.text)+'</div></li>');
+				});
+			}
+
+		showLog=	function (msg, data, isBefore) {
+				if (data) {
+					msg = msg + '<span class="strong">' + data + '</span>';
+				}
+				var li = document.createElement('li');
+				li.innerHTML = msg;
+				if (isBefore) {
+					printWall.insertBefore(li, printWall.childNodes[0]);
+				} else {
+					printWall.appendChild(li);
+				}
+				printWall.scrollTop = printWall.scrollHeight;
+			}
+
+			function formatTime(time) {
+				var date = new Date(time);
+				var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+				var currentDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+				var hh = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+				var mm = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+				var ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+				return date.getFullYear() + '-' + month + '-' + currentDate + ' ' + hh + ':' + mm + ':' + ss;
+			}
+
+			function encodeHTML(source) {
+				return String(source)
+					.replace(/&/g, '&amp;')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;')
+					.replace(/\\/g, '&#92;')
+					.replace(/"/g, '&quot;')
+					.replace(/'/g, '&#39;');
+			}
+					},
+					error: function(json) {
+						console.log("失败");
+					}
+				});
+			}
+		});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+		</script>
+	</body>
+
+</html>

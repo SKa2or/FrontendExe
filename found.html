@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/public.css" />
+		<link rel="stylesheet" type="text/css" href="css/base/swiper.min.css" />
+		<script src="js/base/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/base/amazeui.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		.found_top {
+			height: 50px;
+			position: fixed;
+			top: 0px;
+			width: 100%;
+			z-index: 999;
+		}
+		
+		.found_content {
+			margin: 70px 0px;
+		}
+		
+		.found_top_txt {
+			color: white;
+			font-weight: bolder;
+			font-family: "微软雅黑";
+			font-size: 20px;
+			line-height: 50px;
+			margin-left: 20px;
+		}
+		
+		.found_lunbo li {
+			list-style-type: none;
+		}
+		
+		.found_lunbo li img {
+			width: 100%;
+			height: 200px;
+		}
+		
+		.found_lunbo ol li {
+			float: left;
+			width: 25%;
+		}
+		
+		.found_lunbo ol li img {
+			height: 50px;
+		}
+		
+		.am-control-thumbs li {
+			width: 100%/4;
+			/* n 为轮播图数量 */
+		}
+		/*.found_lunbo ol {
+			display: none;
+		}*/
+		
+		.close {
+			right: 10px;
+		}
+		
+		.index_content_news {
+			border-bottom: 5px solid #eee;
+			padding: 10px;
+		}
+		
+		.index_content_news_title {
+			margin: 10px 0px;
+		}
+		
+		.index_content_news_txt {
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			overflow: hidden;
+			-webkit-line-clamp: 2;
+		}
+		.index_content_news_txt img{
+			width: 100%;
+		}
+		.remen{
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<!--
+        	作者：530929822@qq.com
+        	时间：2017-03-29
+        	描述：found页
+        -->
+		<!--顶部开始-->
+		<div class="found_top top_blue">
+			<span class="found_top_txt">发现</span>
+		</div>
+		<!--顶部结束-->
+		<!--内容开始-->
+		<!--loading预加载-->
+			<div class="csshub-loading" v-if='loadingShow'>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+		<div  class="found_content" id="content" style="display: none;" >
+			<!--轮播图-->
+			<!--<div data-am-widget="slider" class="am-slider found_lunbo am-slider-default" data-am-slider='{&quot;animation&quot;:&quot;slide&quot;,&quot;controlNav&quot;:&quot;thumbnails&quot;}'>
+				<ul class="am-slides">
+					<li data-thumb="img/found/3.jpg">
+						<img src="img/found/3.jpg">
+					</li>
+					<li data-thumb="img/found/2.jpg">
+						<img src="img/found/2.jpg">
+
+					</li>
+					<li data-thumb="img/found/4.jpg">
+						<img src="img/found/4.jpg">
+
+					</li>
+					<li data-thumb="img/found/6.png">
+						<img src="img/found/6.png">
+
+					</li>
+				</ul>
+			</div>-->
+			<!--热门内容-->
+			<div class="remen font-size16 font-weight m_left10">
+				热门内容
+			</div>
+			
+			<!--发帖1-->
+			<div  class="index_content_news position-r" v-for='item in list' @click='index($index)'>
+				<span class="position-a  Hui-iconfont Hui-iconfont-close close font_color9"></span>
+				<div class="index_content_news_top">
+					<!--<img class="width-20 b_radus" src="img/personal/266007025355415553.jpg" />-->
+					<span class="font_color9 font-size14">话题· <span v-html='item.fenlei'></span></span><br />
+					<span class="font_color9 font-size14">发帖人· <span  v-html='item.user_id'></span></span>
+				</div>
+				<div class="index_content_news_title font-size16 font-weight" v-html='item.title'></div>
+				<div class="index_content_news_txt font-size14 font_color3" v-html='item.context'>
+				</div>
+				<div class="font-size14 font_color9 margin-TB5">
+					<span class="index_dianzan"><span v-html='item.n_zan'></span> 点赞</span> · <span class="index_dianzan"><span v-html='item.n_ping'></span>评论</span>
+				</div>
+			</div>
+
+		</div>
+		<!--内容结束->
+		<!--底部按钮开始-->
+		<div class="weui-tabbar footer">
+			<a href="index.html" class="weui-tabbar__item ">
+				<p class=" weui-tabbar__label Hui-iconfont Hui-iconfont-share-zhihu"></p>
+			</a>
+			<a href="found.html" class="weui-tabbar__item">
+				<p class="footertab_blue weui-tabbar__label Hui-iconfont Hui-iconfont-canshu"></p>
+			</a>
+			<a href="IM.html" class="weui-tabbar__item">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-msg"></p>
+			</a>
+			<a href="personal.html" class="weui-tabbar__item">
+				<p class="weui-tabbar__label Hui-iconfont Hui-iconfont-menu"></p>
+			</a>
+		</div>
+		<!--底部按钮结束-->
+	</body>
+	<script src="js/base/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	if (sessionStorage.getItem("夜间")) {
+		$("body").attr("style","background-image: url(img/index/timg.jpg);color: white; background-size: cover;")
+	}
+		var ss;
+		var dd;
+		$.ajax({
+			type: 'get',
+			url: "http://v2.mashupcloud.cn/developer/auth.do",
+			data: {
+				appkey: 'FvWrIYOQoTUYVbscUNQoQAVqsLnZqKEN',
+				appsecret: 'ugCfcSmyLkcbCGfIuFOPEgTgPQPbyJSE'
+			},
+			success: function(json) {
+				console.log(json)
+				ss = JSON.parse(json)[1];
+				dd = JSON.parse(json)[2];
+				$.ajax({
+					type: 'get',
+					url: "http://v2.mashupcloud.cn/SQL/sele_tie_zan/",
+					data: {
+						appid: dd,
+						token: ss,
+						name: 'sele_tie_zan'
+					},
+					success: function(json) {
+						var vue = new Vue({
+							el: "body",
+							data: {
+								list: JSON.parse(json)[2],
+								loadingShow:true
+							},
+							methods:{
+								index:function  (index) {
+									console.log(index)
+									location.href = "card.html?" + "index=" + encodeURI(this.list[index].id);
+								}
+							}
+						})
+						for (var i = 0; i < JSON.parse(json)[2].length; i++) {
+							console.log(JSON.parse(json)[2][i].user_id)
+							$.ajax({
+								type: "get",
+								url: "http://v2.mashupcloud.cn/SQL/sele_user/",
+								async: false,
+								data: {
+									appid: dd,
+									token: ss,
+									name: 'sele_user',
+									_v1: JSON.parse(json)[2][i].user_id
+								},
+								success: function(json) {
+									//把数组中的p_id修改成名字
+									vue.list[i].user_id = JSON.parse(json)[2][0].nicheng
+									console.log(vue.list[0])
+//console.log(JSON.parse(json)[2][0].nicheng)
+
+								}
+							});
+						}
+//						console.log(JSON.parse(json)[2])
+							vue.loadingShow=false;
+							$("#content").attr("style","display:block;")
+//							$("#content").attr("style","display: block;")
+					},
+					error: function(json) {
+						console.log("失败");
+					}
+				});
+			}
+		});
+	</script>
+
+</html>

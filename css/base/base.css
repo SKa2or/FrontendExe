@@ -1,0 +1,41 @@
+/*右侧客服*/
+
+.izl-rmenu {
+	position: fixed;
+	left: 80%;
+	bottom: 80px;
+	/*padding-bottom: 73px;*/
+	z-index: 999;
+}
+
+.izl-rmenu .btn {
+	width: 50px;
+	height: 50px;
+	border-radius: 150px;
+	margin-bottom: 1px;
+	cursor: pointer;
+	position: relative;
+}
+
+.izl-rmenu .btn-phone {
+	background-color: #a2abb0;
+	background-image: url(../../img/index/问号.jpg);
+	background-size: cover;
+	background-position-x: -14px;
+}
+
+.izl-rmenu .btn-phone:hover {
+	background-color: #f06f52;
+	/*background: url(../../img/index/base_service_two.png) 0px 0px no-repeat;*/
+}
+
+.izl-rmenu .btn-top {
+	background: url(../../img/index/base_top.png) -10px -10px no-repeat;
+	background-color: #fe9700;
+	display: none;
+}
+
+.izl-rmenu .btn-top:hover {
+	background-color: #f06f52;
+	background: url(../../img/index/base_top_two.png) -10px -10px no-repeat;
+}

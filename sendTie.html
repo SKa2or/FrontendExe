@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>发帖</title>
+		<link rel="stylesheet" type="text/css" href="css/base/iconfont.css"/>
+		<style type="text/css">
+		*{
+			margin:0px;
+			padding:0px;
+		}
+			.sendTieTop{
+				height: 50px;
+				border-bottom: 1px solid #EEEEEE;
+				display: -webkit-box;
+				-webkit-box-align: center;
+			}
+			.sendTieTop_fan{
+				width: 50px;
+				color: #999;
+				margin-left: 10px;
+				font-size: 18px;
+			}
+			.sendTieTop_txt{
+				font-size: 18px;
+				-webkit-box-flex: 1;
+			}
+			.sendTieContent_title{
+				border-bottom: 2px solid rgba(0,0,155,1);
+				height: 30px;
+				width: 90%;
+				margin: auto;
+			}
+			.sendTieContent_title input{
+				height: 30px;
+				font-size: 18px;
+				border: none;
+				outline: none;
+			}
+			.sendTieContent_content{
+				width: 90%;
+				margin: 20px auto;
+				outline: none;
+				font-size: 16px;
+				color: #999;
+			}
+			.sendTieContent_content:empty:before{
+				content: attr(placeholder);
+				color: #999999;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="sendTieTop">
+			<div class="sendTieTop_fan Hui-iconfont Hui-iconfont-close "></div>
+			<div class="sendTieTop_txt">提问</div>
+		</div>
+		<div class="sendTieContent">
+			<div class="sendTieContent_title">
+				<input type="text" placeholder="请输入标题"/>
+			</div>
+			<div class="sendTieContent_content" placeholder="请输入内容..." contenteditable="true" ></div>
+		</div>
+	</body>
+</html>
